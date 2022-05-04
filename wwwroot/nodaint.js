@@ -14,10 +14,8 @@ var graphObject;
 $(async function () {
     inNoda = true;
     currentStateId = uuidv4();
-    var url = window.location.origin;
+    var url = 'https://darl.dev';
     var key = "";
-    if (url === "https://localhost:44311/index")
-        url = "https://localhost:44311";
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
     if ($('#kgurl').data('kgurl')) {
