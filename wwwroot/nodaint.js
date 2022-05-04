@@ -100,7 +100,7 @@ $(async function () {
             await HandleChatText(text);
     });
 
-    window.noda.OnNodeUpdate = async function (node) {
+    window.noda.OnNodeUpdated = async function (node) {
         if (kgname) {
             var res = await graphObject({ name: kgname, id: node.uuid });
             nodeEditor.setValue(res.getGraphObjectById);
