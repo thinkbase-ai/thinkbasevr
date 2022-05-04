@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "GraphConnection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphElement"
+        },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "weight": {
+              "type": "number",
+              "format": "double"
+            },
+            "startId": {
+              "type": "string"
+            },
+            "endId": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "GraphElement": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphAbstraction"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": true,
+          "properties": {
+            "id": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "name": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "lineage": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "existence": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/definitions/DarlTime"
+              }
+            },
+            "inferred": {
+              "type": "boolean"
+            },
+            "_virtual": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "properties": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/definitions/GraphAttribute"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DarlTime": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "raw": {
+          "type": "number",
+          "format": "double"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "GraphAttribute": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphElement"
+        },
+        {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "value": {
+              "type": "string"
+            },
+            "confidence": {
+              "type": "number",
+              "format": "double"
+            },
+            "type": {
+              "$ref": "#/definitions/DataType"
+            }
+          }
+        }
+      ]
+    },
+    "DataType": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "numeric",
+        "categorical",
+        "textual",
+        "sequence",
+        "temporal",
+        "duration",
+        "markdown",
+        "ruleset",
+        "link",
+        "connection"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "GraphAbstraction": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/GraphElement"
+    },
+    {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "externalId": {
+          "type": "string"
+        }
+      }
+    }
+  ]
+}
