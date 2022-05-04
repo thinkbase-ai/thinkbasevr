@@ -100,10 +100,13 @@ $(async function () {
             await HandleChatText(text);
     });
 
-    window.noda.OnNodeUpdated = async function (node) {
-        if (kgname) {
+    window.noda.OnNodeUpdated = async function (node) {   
+        try{
             var res = await graphObject({ name: kgname, id: node.uuid });
             nodeEditor.setValue(res.getGraphObjectById);
+        }
+        catch(err){
+            HandleError(err);
         }
     }
     const response = await fetch("wwwroot/graphobjectschema.json");
