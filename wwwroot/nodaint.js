@@ -108,7 +108,7 @@ $(async function () {
             nodeEditor.setValue(res.getGraphObjectById);
         }
     }
-    const response = await fetch("wwwroot/GraphObject_schema.json");
+    const response = await fetch("wwwroot/graphobjectschema.json");
     const schema = await response.json();
     nodeEditor = new JSONEditor($('#nodeEditor')[0], {
         schema: schema,
