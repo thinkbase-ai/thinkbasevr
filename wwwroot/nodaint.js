@@ -9,6 +9,8 @@ var nodeLookup = {};
 var inNoda;
 var nodeEditor;
 var graphObject;
+var diagonalSize = 3.0;
+var offset = {x: 1.3, y: 0.0, z: 0.2};
 
 
 $(async function () {
@@ -16,8 +18,6 @@ $(async function () {
     currentStateId = uuidv4();
     var url = 'https://darl.dev';
     var key = "";
-    var offset = {x: 1.3, y: 0.0, z: 0.2};
-    var diagonalSize = 3.0;
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
     if ($('#kgurl').data('kgurl')) {
