@@ -16,6 +16,8 @@ $(async function () {
     currentStateId = uuidv4();
     var url = 'https://darl.dev';
     var key = "";
+    var offset = {x: 1.3, y: 0.0, z: 0.2};
+    var diagonalSize = 3.0;
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
     if ($('#kgurl').data('kgurl')) {
@@ -33,7 +35,7 @@ $(async function () {
         demo = true;
     }
     interact = graph('query int($name: String! $ksid: String! $text:  String!){interactKnowledgeGraph(kgModelName: $name conversationId: $ksid conversationData: { dataType: textual name: "" value: $text }){ darl reference activeNodes response{dataType name value categories{name value }}}}');
-    nodaSource = graph('query ($name: String!){nodaView(graphName: $name)}');
+    nodaSource = graph('query ($name: String! $offset: NodaPosition $diagonal: Float){nodaView(graphName: $name boundingDiagonal: $diagonal offset: $offset)}');
     graphObject = graph('query ($name: String! $id: String!){getGraphObjectById(graphName: $name id: $id){existence{raw precision}externalId id	inferred lineage name externalId properties{existence{raw precision}id inferred	lineage	name value confidence type virtual properties{existence{raw	precision}id inferred lineage name value confidence	type virtual}}virtual}}');
 
     $('#kgmodel-dropdown').on('change', async function () {
@@ -131,7 +133,7 @@ $(async function () {
 
 async function Build() {
     Clear();
-    var res = await nodaSource({ name: kgname });
+    var res = await nodaSource({ name: kgname, diagonal: diagonalSize, offset: offset });
     root = JSON.parse(res.nodaView);
     $('#msg_input').val(root.initialText);
     var converter = new showdown.Converter();
