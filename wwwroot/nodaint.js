@@ -10,7 +10,7 @@ var inNoda;
 var nodeEditor;
 var graphObject;
 var diagonalSize = 3.0;
-var offset = {x: 1.3, y: 0.0, z: 0.2};
+var offset = {x: -1.3, y: 0.0, z: 0.2};
 
 
 $(async function () {
