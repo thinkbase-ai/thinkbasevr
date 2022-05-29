@@ -103,6 +103,7 @@ $(async function () {
     });
 
     window.noda.OnNodeUpdated = async function (node) {   
+        alert("Node updated: " + node.uuid);
         try{
             var res = await graphObject({ name: kgname, id: node.uuid });
             nodeEditor.setValue(res.getGraphObjectById);
