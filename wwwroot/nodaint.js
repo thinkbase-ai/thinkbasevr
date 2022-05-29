@@ -102,16 +102,20 @@ $(async function () {
             await HandleChatText(text);
     });
 
-    window.noda.OnNodeUpdated = async function (node) {   
-        alert("Node updated: " + node.uuid);
-        try{
-            var res = await graphObject({ name: kgname, id: node.uuid });
-            nodeEditor.setValue(res.getGraphObjectById);
-        }
-        catch(err){
-            HandleError(err);
-        }
-    }
+    // window.noda.OnNodeUpdated = async function (node) {   
+    //    alert("Node updated: " + node.uuid);
+    //    try{
+    //        var res = await graphObject({ name: kgname, id: node.uuid });
+   //         nodeEditor.setValue(res.getGraphObjectById);
+   //     }
+   //     catch(err){
+   //         HandleError(err);
+  //      }
+  //  }
+    window.noda.onNodeUpdated = function (node) {
+                 eventMessage("Node updated with uuid: " + node.uuid);
+                 }
+    
     const response = await fetch("wwwroot/graphobjectschema.json");
     const schema = await response.json();
     nodeEditor = new JSONEditor($('#nodeEditor')[0], {
