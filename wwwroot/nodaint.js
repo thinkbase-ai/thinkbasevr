@@ -58,7 +58,7 @@ $(async function () {
 
     $('#kg-build').click(async function () {
         try {
-            if (kgname.length) {
+            if (kgname) {
                 await Build();
             }
             else {
