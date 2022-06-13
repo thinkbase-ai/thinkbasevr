@@ -148,22 +148,22 @@ $(async function () {
                 content: "Clicking 'Build' will create an interactive graph to your left."
             },
             {
-                element: "kg-clear",
+                element: "#kg-clear",
                 title: "Remove a KG",
                 content: "Clicking 'Clear' will remove a graph you've just loaded."
             },
             {
-                element: "msg_input",
+                element: "#msg_input",
                 title: "Interact with the KG",
                 content: "This is preloaded with text that will start the chatbot conversation. Give textual or numeric answers here."
             },
             {
-                element: "msg_send_btn",
+                element: "#msg_send_btn",
                 title: "Send your response to the KG",
                 content: "Clicking here will send your text to the chatbot, and then to the Knowledge Graph."
             },
             {
-                element: "kg-reset",
+                element: "#kg-reset",
                 title: "Clear the chatbot",
                 content: "Clicking 'Reset conversation' will remove the existing conversation and start again from the beginning.."
             }
