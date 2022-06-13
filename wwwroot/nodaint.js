@@ -135,7 +135,7 @@ $(async function () {
         alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
     }
 
-    var tour = new Tour({
+ /*   var tour = new Tour({
         steps: [
             {
                 element: "#kgmodel-dropdown",
@@ -174,7 +174,7 @@ $(async function () {
     tour.init();
 
     // Start the tour
-    tour.start();
+    tour.start();*/
 });
 
 async function Build() {
