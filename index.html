@@ -16,124 +16,126 @@
     <link href="/wwwroot/root.min.css" rel="stylesheet" />
     <link href="/wwwroot/vr.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/wwwroot/GraphEdit.css" />
+    <link rel="stylesheet" href="/wwwroot/bootstrap-tour.min.css" />
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4TH5Q6TBTS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TH5Q6TBTS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-4TH5Q6TBTS');
-</script>
-<!-- Hotjar Tracking Code for https://thinkbasevr.com -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:2998985,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-<script src="https://kit.fontawesome.com/f45aad6732.js" crossorigin="anonymous"></script>
+        gtag('config', 'G-4TH5Q6TBTS');
+    </script>
+    <!-- Hotjar Tracking Code for https://thinkbasevr.com -->
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 2998985, hjsv: 6 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+    <script src="https://kit.fontawesome.com/f45aad6732.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
-    <main role="main">
-<div class="row">
-    <div class="col-sm-10 ml-3" >
-        <h3>ThinkBase Noda Demo</h3>
-    </div>
-    <div class="col-sm-1 ml-3" >
-        <button id="View-Edit" class="btn btn-info">Edit</button>
-    </div>
-</div>
-<hr/>
-<div class="container-fluid" style="min-height:100vh" id="ViewContainer">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="row ml-2">
-                <h3>Graph selection</h3>
-            </div>
-            <div class="row ml-2">
-                Select a Knowledge Graph to view and interact with.
-            </div>
-            <div>&nbsp;</div>
-            <div class="row ml-2">
-                <select id="kgmodel-dropdown" name="kgmodel-dropdown" class="dropdown">
-                    <option selected="true" disabled>Choose...</option>
-                    <option value="personality_test.graph">Personality test</option>
-                    <option value="ai_triage.graph">Advice implementing AI</option>
-                    <option value="Cocomo_II.graph">Price or value software development</option>
-                </select>
-            </div>
-            <div>&nbsp;</div>
-            <div class="row ml-2">
-                <button id="kg-build" class="btn btn-info">Build</button>
-                <button id="kg-clear" class="btn btn-info">Clear</button>
-                <button id="kg-reset" class="btn btn-info">Reset conversation</button>
-            </div>
-            <div class="row ml-2">
-                <h3>Graph description</h3>
-            </div>
-            <div class="row ml-2">
-                <div id="kg-description">
 
-                </div>
+    <main role="main">
+        <div class="row">
+            <div class="col-sm-10 ml-3">
+                <h3>ThinkBase Noda Demo</h3>
+            </div>
+            <div class="col-sm-1 ml-3">
+                <button id="View-Edit" class="btn btn-info">Edit</button>
             </div>
         </div>
+        <hr />
+        <div class="container-fluid" style="min-height:100vh" id="ViewContainer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row ml-2">
+                        <h3>Graph selection</h3>
+                    </div>
+                    <div class="row ml-2">
+                        Select a Knowledge Graph to view and interact with.
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row ml-2">
+                        <select id="kgmodel-dropdown" name="kgmodel-dropdown" class="dropdown">
+                            <option selected="true" disabled>Choose...</option>
+                            <option value="personality_test.graph">Personality test</option>
+                            <option value="ai_triage.graph">Advice implementing AI</option>
+                            <option value="Cocomo_II.graph">Price or value software development</option>
+                        </select>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="row ml-2">
+                        <button id="kg-build" class="btn btn-info">Build</button>
+                        <button id="kg-clear" class="btn btn-info">Clear</button>
+                        <button id="kg-reset" class="btn btn-info">Reset conversation</button>
+                    </div>
+                    <div class="row ml-2">
+                        <h3>Graph description</h3>
+                    </div>
+                    <div class="row ml-2">
+                        <div id="kg-description">
 
-        <div class="col-sm-6">
-            <h3>Conversation</h3>
-            <div class="mesgs">
-                <div class="msg_history">
+                        </div>
+                    </div>
                 </div>
-                <div class="type_msg">
-                    <div class="input_msg_write">
-                        <input type="text" id="msg_input" class="write_msg" placeholder="Type a message" />
-                        <button class="msg_send_btn" id="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                <div class="col-sm-6">
+                    <h3>Conversation</h3>
+                    <div class="mesgs">
+                        <div class="msg_history">
+                        </div>
+                        <div class="type_msg">
+                            <div class="input_msg_write">
+                                <input type="text" id="msg_input" class="write_msg" placeholder="Type a message" />
+                                <button class="msg_send_btn" id="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="container-fluid d-none" style="min-height:100vh" id="EditContainer">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="row ml-2">
-                <h3>Sub-graph selection</h3>
-            </div>
-            <div class="row ml-2">
-                <label><input type="radio" name="network" value="Real" checked />Real </label>
-                &nbsp;
-                <label><input type="radio" name="network" value="Virtual" />Virtual </label>
-                &nbsp;
-                <label><input type="radio" name="network" value="Recognition" />Recognition </label>
-            </div>            
-        </div>
-        <div class="col-sm-6">
-            <div class="row ml-2">
-                <h3>Selected node's properties and attributes</h3>
-            </div>
-            <div id="nodeEditor" class="row ml-2" >
+        <div class="container-fluid d-none" style="min-height:100vh" id="EditContainer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row ml-2">
+                        <h3>Sub-graph selection</h3>
+                    </div>
+                    <div class="row ml-2">
+                        <label><input type="radio" name="network" value="Real" checked />Real </label>
+                        &nbsp;
+                        <label><input type="radio" name="network" value="Virtual" />Virtual </label>
+                        &nbsp;
+                        <label><input type="radio" name="network" value="Recognition" />Recognition </label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row ml-2">
+                        <h3>Selected node's properties and attributes</h3>
+                    </div>
+                    <div id="nodeEditor" class="row ml-2">
 
+                    </div>
+                    <div id="events" class="events"><p>Events:<br /><span id="eventsMessage"></span></p></div>
+                </div>
             </div>
-            <div id="events" class="events"><p>Events:<br/><span id="eventsMessage"></span></p></div>
         </div>
-    </div>
-</div>
-</main>
-  
-<footer class="footer text-center">
-    <p class="footer">&copy; 2022 - Thinkbase, LLC. DARL® is a registered trademark of Thinkbase, LLC. <a href="https://darl.ai/terms" target="_blank">Terms </a><a href="https://darl.ai/terms" target="_blank">Privacy </a>  RQRF, .Net core 5.0</p>
-</footer>
+    </main>
+
+    <footer class="footer text-center">
+        <p class="footer">&copy; 2022 - Thinkbase, LLC. DARL® is a registered trademark of Thinkbase, LLC. <a href="https://darl.ai/terms" target="_blank">Terms </a><a href="https://darl.ai/terms" target="_blank">Privacy </a>  RQRF, .Net core 5.0</p>
+    </footer>
     <script src="/wwwroot/vr.min.js" type="text/javascript"></script>
     <script src="https://noda.io/api/includes/noda.js"></script>
-    <script src="/wwwroot/nodaint.js"></script>
     <script src="/wwwroot/jsoneditor.js"></script>
     <script src="/wwwroot/housekeeping.js"></script>
+    <script src="/wwwroot/bootstrap-tour.min.js"></script>
+    <script src="/wwwroot/nodaint.js"></script>
 </body>
 </html>
