@@ -118,16 +118,17 @@ $(async function () {
    //         HandleError(err);
   //      }
   //  }
-    window.noda.onNodeUpdated = async function (node) {
-        var found = true;
+    window.noda.onNodeUpdated = function (node) {
+        var found = false;
         var id = "";
-        try {
-            var res = await graphObject({ name: kgname, id: node.uuid });
-            id = res.getGraphObjectById.name;
-        }
-        catch (err) {
-            found = false;
-        }
+ //       try {
+//            var res = await graphObject({ name: kgname, id: node.uuid });
+ //           id = res.getGraphObjectById.name;
+//            found = true;
+//        }
+//        catch (err) {
+//            found = false;
+//        }
         eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date() + " name: " + found ? id : "Name not found.");
     }
     
