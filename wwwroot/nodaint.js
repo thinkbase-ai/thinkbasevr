@@ -15,6 +15,7 @@ var offset = {x: -1.3, y: -0.8, z: 0.0};
 
 $(async function () {
     inNoda = true;
+    $('#eventsMessage').html("Starting...");
     currentStateId = uuidv4();
     var url = 'https://darl.dev';
     var key = "";
