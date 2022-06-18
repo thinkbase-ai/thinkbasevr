@@ -115,36 +115,7 @@ if (window.vuplex) {
     window.addEventListener('vuplexready', addMessageListener);
 }
 
-function addMessageListener() {
 
-    window.vuplex.addEventListener('message', function (event) {
-        let json = event.data;
-
-        console.log("Receiving Response: " + event.data);
-
-        var response = JSON.parse(event.data);
-
-        if (response.messageId != null) {
-
-            var messageProcessingCallback = window.noda.MessageProcessingQueue[response.messageId];
-
-            if (messageProcessingCallback != null) {
-                messageProcessingCallback(response);
-            }
-        }
-
-        if (response.eventType != null) {
-            const eventHandler = "on" + response.eventType.charAt(0).toUpperCase() + response.eventType.slice(1)
-            if (window.noda[eventHandler] != null) {
-                $('#eventsMessage').html(eventHandler + " : " +  response.eventData);
-                if (response.eventData != null)
-                    window.noda[eventHandler](response.eventData);
-                else
-                    window.noda[eventHandler]();
-            }
-        }
-    });
-}
 
 function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
