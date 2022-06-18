@@ -136,6 +136,7 @@ function addMessageListener() {
         if (response.eventType != null) {
             const eventHandler = "on" + response.eventType.charAt(0).toUpperCase() + response.eventType.slice(1)
             if (window.noda[eventHandler] != null) {
+                $('#eventsMessage').html(eventHandler + " : " +  response.eventData);
                 if (response.eventData != null)
                     window.noda[eventHandler](response.eventData);
                 else
