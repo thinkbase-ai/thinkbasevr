@@ -43,16 +43,22 @@ $(async function () {
     });
 
     $('#View-Edit').click(function () {
-        if ($('#View-Edit').text() === "Edit") {
-            $('#ViewContainer').addClass('d-none');
+        if ($('#View-Edit').text() === "Edit") { //view container visible
             $('#EditContainer').removeClass('d-none');
-            $('#View-Edit').text("View");
+            $('#ViewContainer').addClass('d-none');
+            $('#View-Edit').text("Debug");
         }
-        else {
+        else if ($('#View-Edit').text() === "Debug") {//edit container visible
             $('#EditContainer').addClass('d-none');
+            $('#DebugContainer').removeClass('d-none');
+            $('#View-Edit').text("View");
+            //draw debug window
+            ViewListeners();
+        }
+        else {//debug container visible
+            $('#DebugContainer').addClass('d-none');
             $('#ViewContainer').removeClass('d-none');
             $('#View-Edit').text("Edit");
-
         }
     });
 
@@ -319,11 +325,41 @@ function ClearChatText() {
     $('.msg_history').empty();
 }
 
-var eventsMessageElement;
 
 
 function eventMessage(message) {
-    eventsMessageElement.innerHTML = message;
+    $('#eventsMessage').html(message);
+}
+
+function ViewListeners() {
+    $('#listenersMessage').html(listAllEventListeners());
+}
+
+function listAllEventListeners() {
+    const allElements = Array.prototype.slice.call(document.querySelectorAll('*'));
+    allElements.push(document); // we also want document events
+    const types = [];
+    for (let ev in window) {
+        if (/^on/.test(ev)) types[types.length] = ev;
+    }
+
+    let elements = [];
+    for (let i = 0; i < allElements.length; i++) {
+        const currentElement = allElements[i];
+        for (let j = 0; j < types.length; j++) {
+            if (typeof currentElement[types[j]] === 'function') {
+                elements.push({
+                    "node": currentElement,
+                    "type": types[j],
+                    "func": currentElement[types[j]].toString(),
+                });
+            }
+        }
+    }
+
+    return elements.sort(function (a, b) {
+        return a.type.localeCompare(b.type);
+    });
 }
 
 
