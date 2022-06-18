@@ -113,7 +113,7 @@ $(async function () {
   //      }
   //  }
     window.noda.onNodeUpdated = function (node) {
-                 eventMessage("Node updated with uuid: " + node.uuid);
+                 eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date());
                  }
     
     const response = await fetch("wwwroot/graphobjectschema.json");
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }, false);
 
 function eventMessage(message) {
-    eventsMessageElement.innerHTML = message + "<br/>" + eventsMessageElement.innerHTML;
+    eventsMessageElement.innerHTML = message;
 }
 
 
