@@ -118,9 +118,18 @@ $(async function () {
    //         HandleError(err);
   //      }
   //  }
-    window.noda.onNodeUpdated = function (node) {
-                 eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date());
-                 }
+    window.noda.onNodeUpdated = async function (node) {
+        var found = true;
+        var id = "";
+        try {
+            var res = await graphObject({ name: kgname, id: node.uuid });
+            id = res.getGraphObjectById.name;
+        }
+        catch (err) {
+            found = false;
+        }
+        eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date() + " name: " + found ? id : "Name not found.");
+    }
     
     const response = await fetch("wwwroot/graphobjectschema.json");
     const schema = await response.json();
