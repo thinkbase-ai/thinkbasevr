@@ -39,7 +39,7 @@ $(async function () {
     nodaSource = graph('query ($name: String! $offset: NodaPosition $diagonal: Float){nodaView(graphName: $name boundingDiagonal: $diagonal offset: $offset)}');
     graphObject = graph('query ($name: String! $id: String!){getGraphObjectById(graphName: $name id: $id){existence{raw precision}externalId id	inferred lineage name externalId properties{existence{raw precision}id inferred	lineage	name value confidence type virtual properties{existence{raw	precision}id inferred lineage name value confidence	type virtual}}virtual}}');
 
-    $('#kgmodel-dropdown').on('change', async function () {
+    $('#kgmodel-dropdown').on('change', function () {
         kgname = this.value;
     });
 
@@ -345,34 +345,13 @@ function eventMessage(message) {
 }
 
 function ViewListeners() {
-    $('#listenersMessage').html(listAllEventListeners());
+    $('#listenersMessage').html(getInstanceMethodNames(document.noda).toString());
 }
 
-function listAllEventListeners() {
-    const allElements = Array.prototype.slice.call(document.querySelectorAll('*'));
-    allElements.push(document); // we also want document events
-    const types = [];
-    for (let ev in window) {
-        if (/^on/.test(ev)) types[types.length] = ev;
-    }
-
-    let elements = [];
-    for (let i = 0; i < allElements.length; i++) {
-        const currentElement = allElements[i];
-        for (let j = 0; j < types.length; j++) {
-            if (typeof currentElement[types[j]] === 'function') {
-                elements.push({
-                    "node": currentElement,
-                    "type": types[j],
-                    "func": currentElement[types[j]].toString(),
-                });
-            }
-        }
-    }
-
-    return elements.sort(function (a, b) {
-        return a.type.localeCompare(b.type);
-    });
+function getInstanceMethodNames(obj) {
+    return Object
+        .getOwnPropertyNames(Object.getPrototypeOf(obj))
+        .filter(name => (name !== 'constructor' && typeof obj[name] === 'function'));
 }
 
 
