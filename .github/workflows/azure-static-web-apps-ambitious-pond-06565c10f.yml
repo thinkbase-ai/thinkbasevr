@@ -31,6 +31,12 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+      - name: Write info to news Item
+        id: newsItem
+        uses: thinkbase-ai/newsitem_action@v1.14
+        with:
+          apiKey: ${{secrets.DARL_API_KEY}}
+          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
