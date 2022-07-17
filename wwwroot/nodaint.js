@@ -9,16 +9,20 @@ var nodeLookup = {};
 var inNoda;
 var nodeEditor;
 var graphObject;
+var kgraphs;
+var graphs;
 var diagonalSize = 3.0;
 var offset = {x: -1.3, y: -0.8, z: 0.0};
 
 
 $(async function () {
-    inNoda = true;
+    inNoda = window.noda.isInstalled();
     $('#eventsMessage').html("Starting...");
     currentStateId = uuidv4();
     var url = 'https://darl.dev';
     var key = "";
+    var nodaID = await window.noda.getUser();
+    $('#userIdValue').text(nodaId);
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
     if ($('#kgurl').data('kgurl')) {
@@ -38,6 +42,11 @@ $(async function () {
     interact = graph('query int($name: String! $ksid: String! $text:  String!){interactKnowledgeGraph(kgModelName: $name conversationId: $ksid conversationData: { dataType: textual name: "" value: $text }){ darl reference activeNodes response{dataType name value categories{name value }}}}');
     nodaSource = graph('query ($name: String! $offset: NodaPosition $diagonal: Float){nodaView(graphName: $name boundingDiagonal: $diagonal offset: $offset)}');
     graphObject = graph('query ($name: String! $id: String!){getGraphObjectById(graphName: $name id: $id){existence{raw precision}externalId id	inferred lineage name externalId properties{existence{raw precision}id inferred	lineage	name value confidence type virtual properties{existence{raw	precision}id inferred lineage name value confidence	type virtual}}virtual}}');
+    kgraphs = graph(`{ kgraphs { name model {description initialText dateDisplay inferenceTime defaultTarget}}}`);
+
+    var graphResp = await kgraphs();
+    graphs = graphResp.kgraphs;
+    //var existingNodes = await window.noda.
 
     $('#kgmodel-dropdown').on('change', function () {
         kgname = this.value;
