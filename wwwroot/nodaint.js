@@ -68,7 +68,6 @@ $(async function () {
             $('#DebugContainer').removeClass('d-none');
             $('#View-Edit').text("View");
             //draw debug window
-            ViewListeners();
         }
         else {//debug container visible
             $('#DebugContainer').addClass('d-none');
@@ -371,16 +370,6 @@ function ClearChatText() {
 
 function eventMessage(message) {
     $('#eventsMessage').html(message);
-}
-
-function ViewListeners() {
-    $('#listenersMessage').html(getInstanceMethodNames(document.noda).toString());
-}
-
-function getInstanceMethodNames(obj) {
-    return Object
-        .getOwnPropertyNames(Object.getPrototypeOf(obj))
-        .filter(name => (name !== 'constructor' && typeof obj[name] === 'function'));
 }
 
 
