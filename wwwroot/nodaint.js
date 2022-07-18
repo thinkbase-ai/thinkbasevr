@@ -148,7 +148,7 @@ $(async function () {
         eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date() + " name: " + found ? id : "Name not found.");
     }
 
-    window.noda.onInitialized = function () {
+    window.noda.onInitialized = async function () {
         if (!window.noda.isInstalled())
             alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
         else {
