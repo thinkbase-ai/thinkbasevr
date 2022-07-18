@@ -21,14 +21,7 @@ $(async function () {
     currentStateId = uuidv4();
     var url = 'https://darl.dev';
     var key = "";
-    try {
-        var nodaID = await window.noda.getUser();
-        $('#userIdValue').text(nodaId);
-    }
-    catch (err) {
-        $('#userIdValue').text("not in Noda");
-        alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
-    }
+
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
     if ($('#kgurl').data('kgurl')) {
@@ -153,6 +146,21 @@ $(async function () {
             HandleError(err);
         }
         eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date() + " name: " + found ? id : "Name not found.");
+    }
+
+    window.noda.onInitialized = function () {
+        if (!window.noda.isInstalled())
+            alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
+        else {
+            try {
+                var nodaID = await window.noda.getUser();
+                $('#userIdValue').text(nodaId);
+            }
+            catch (err) {
+                $('#userIdValue').text("not in Noda");
+                alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
+            }
+        }
     }
     
     const response = await fetch("wwwroot/graphobjectschema.json");
