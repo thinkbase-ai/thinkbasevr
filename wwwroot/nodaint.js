@@ -21,7 +21,12 @@ $(async function () {
     currentStateId = uuidv4();
     var url = 'https://darl.dev';
     var key = "";
-    var nodaID = await window.noda.getUser();
+    try {
+        var nodaID = await window.noda.getUser();
+    }
+    catch (err) {
+        alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
+    }
     $('#userIdValue').text(nodaId);
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
