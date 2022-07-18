@@ -366,10 +366,12 @@ function ClearChatText() {
     $('.msg_history').empty();
 }
 
-
+function clearEvents() {
+    $('#eventsMessage').html("");
+}
 
 function eventMessage(message) {
-    $('#eventsMessage').html(message);
+    $('#eventsMessage').html(message + "<br/>" + $('#eventsMessage').html());
 }
 
 
