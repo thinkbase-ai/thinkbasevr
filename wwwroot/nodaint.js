@@ -48,9 +48,13 @@ $(async function () {
     nodaSource = graph('query ($name: String! $offset: NodaPosition $diagonal: Float){nodaView(graphName: $name boundingDiagonal: $diagonal offset: $offset)}');
     graphObject = graph('query ($name: String! $id: String!){getGraphObjectById(graphName: $name id: $id){existence{raw precision}externalId id	inferred lineage name externalId properties{existence{raw precision}id inferred	lineage	name value confidence type virtual properties{existence{raw	precision}id inferred lineage name value confidence	type virtual}}virtual}}');
     kgraphs = graph(`{ kgraphs { name model {description initialText dateDisplay inferenceTime defaultTarget}}}`);
-
-    var graphResp = await kgraphs();
-    graphs = graphResp.kgraphs;
+    try {
+        var graphResp = await kgraphs();
+        graphs = graphResp.kgraphs;
+    }
+    catch (err) {
+        HandleError(err);
+    }
     //var existingNodes = await window.noda.
 
     $('#kgmodel-dropdown').on('change', function () {
