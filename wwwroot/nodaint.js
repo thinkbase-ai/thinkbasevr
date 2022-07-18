@@ -23,11 +23,12 @@ $(async function () {
     var key = "";
     try {
         var nodaID = await window.noda.getUser();
+        $('#userIdValue').text(nodaId);
     }
     catch (err) {
+        $('#userIdValue').text("not in Noda");
         alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
     }
-    $('#userIdValue').text(nodaId);
     graph = graphql(url + "/graphql");
     var apiKey = findGetParameter("apikey");
     if ($('#kgurl').data('kgurl')) {
