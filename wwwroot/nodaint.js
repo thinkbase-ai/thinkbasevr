@@ -43,7 +43,8 @@ $(async function () {
     graphObject = graph('query ($name: String! $id: String!){getGraphObjectById(graphName: $name id: $id){existence{raw precision}externalId id	inferred lineage name externalId properties{existence{raw precision}id inferred	lineage	name value confidence type virtual properties{existence{raw	precision}id inferred lineage name value confidence	type virtual}}virtual}}');
     kgraphs = graph(`{ kgraphs { name model {description initialText dateDisplay inferenceTime defaultTarget}}}`);
     try {
-        Web.EnableRemoteDebugging();
+        if(window.vuplex)
+            window.vuplex.EnableRemoteDebugging();
         var graphResp = await kgraphs();
         graphs = graphResp.kgraphs;
     }
