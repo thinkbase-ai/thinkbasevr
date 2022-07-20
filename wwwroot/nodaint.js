@@ -7,7 +7,6 @@ var currentStateId;
 var root;
 var nodeLookup = {};
 var inNoda;
-var nodeEditor;
 var graphObject;
 var kgraphs;
 var graphs;
@@ -139,7 +138,10 @@ $(async function () {
         try {
             var res = await graphObject({ name: kgname, id: node.uuid });
             id = res.getGraphObjectById.name;
-            nodeEditor.setValue(res.getGraphObjectById);
+            $('#nodeIdValue').text(node.uuid);
+            $('#nodeNameValue').text(id);
+            $('#nodeExternalIdValue').text(res.getGraphObjectById.externalId);
+            $('#nodeLineageValue').text(res.getGraphObjectById.lineage);
             found = true;
         }
         catch (err) {
@@ -163,21 +165,7 @@ $(async function () {
             }
         }
     }
-    
-    const response = await fetch("wwwroot/graphobjectschema.json");
-    const schema = await response.json();
-    nodeEditor = new JSONEditor($('#nodeEditor')[0], {
-        schema: schema,
-        theme: 'bootstrap4',
-        disable_array_add: true,
-        disable_array_delete: true,
-        disable_array_delete_all_rows: true,
-        disable_array_delete_last_row: true,
-        disable_collapse: true,
-        disable_edit_json: true,
-        disable_properties: true,
-        iconlib: "fontawesome5"
-    });
+     
 
     if (!inNoda) {
         alert("This page is intended to be viewed inside the Noda mind-mapping app. Go to https://Noda.io ");
