@@ -139,13 +139,14 @@ $(async function () {
         try {
             var res = await graphObject({ name: kgname, id: node.uuid });
             id = res.getGraphObjectById.name;
+            nodeEditor.setValue(res.getGraphObjectById);
             found = true;
         }
         catch (err) {
             found = false;
             HandleError(err);
         }
-        eventMessage("Node updated with uuid: " + node.uuid + " at " + new Date() + " name: " + found ? id : "Name not found.");
+        eventMessage("Node updated: " + node.uuid + " name: " + found ? id : "Name not found.");
     }
 
     window.noda.onInitialized = async function () {
