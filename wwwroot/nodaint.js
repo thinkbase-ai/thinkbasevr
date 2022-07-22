@@ -133,7 +133,6 @@ $(async function () {
   //  }
 
     window.noda.onNodeUpdated = async function (node) {
-        var found = false;
         var id = "";
         try {
             var res = await graphObject({ name: kgname, id: node.uuid });
@@ -142,13 +141,18 @@ $(async function () {
             $('#nodeNameValue').text(id);
             $('#nodeExternalIdValue').text(res.getGraphObjectById.externalId);
             $('#nodeLineageValue').text(res.getGraphObjectById.lineage);
-            found = true;
+            if (res.getGraphObjectById.properties) {
+                res.getGraphObjectById.properties.forEach(function (item, index) {
+                    const accordianItem = '<div class="accordion-item"><h2 class="accordion-header" id = "heading' + index + '" ><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' + index + '" aria-expanded="true" aria-controls="collapse' + index + '">' + 
+                        'Attribute' + (index + 1) + '</button></h2 ><div id="collapse' + index + '" class="accordion-collapse collapse show" aria-labelledby="heading' + index + '" data-bs-parent="#attributeAccordion">< div class="accordion-body" > Content </div ></div ></div >';
+                    $('attributeAccordion').html($('attributeAccordion').html() + accordianItem);
+                });
+            } 
+
         }
         catch (err) {
-            found = false;
             HandleError(err);
         }
-        eventMessage("Node updated: " + node.uuid + " name: " + found ? id : "Name not found.");
     }
 
     window.noda.onInitialized = async function () {
